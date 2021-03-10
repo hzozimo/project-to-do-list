@@ -1,3 +1,13 @@
+const lista = document.getElementById('lista-tarefas');
+
+// function pegaValoresSalvos() {
+//   if (localStorage.getItem('lista') !== '') {
+//     document.getElementById('container-lista-tarefas').outerHTML = localStorage.getItem('lista');
+//   }
+// }
+
+// window.onload = pegaValoresSalvos;
+
 function limparInput() {
   document.getElementById('texto-tarefa').value = '';
 }
@@ -6,7 +16,6 @@ function adicionaTarefa() {
   const tarefa = document.getElementById('texto-tarefa').value;
   if (tarefa !== '') {
     const criarLi = document.createElement('li');
-    const lista = document.getElementById('lista-tarefas');
     lista.appendChild(criarLi).innerText = tarefa;
     limparInput();
   }
@@ -28,7 +37,6 @@ function colocaFundoCinza(event) {
   evento.target.classList.add('selecionado');
 }
 
-const lista = document.getElementById('lista-tarefas');
 lista.addEventListener('click', colocaFundoCinza);
 
 function colocaTiraRisco(event) {
@@ -43,7 +51,6 @@ function colocaTiraRisco(event) {
 lista.addEventListener('dblclick', colocaTiraRisco);
 
 function esvaziaLista() {
-  const lista = document.getElementById('lista-tarefas');
   while (lista.firstChild) { // esvazia a tabela, tirado do link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
     lista.removeChild(lista.lastChild);
   }
@@ -61,3 +68,10 @@ function apagaFinalizados() {
 
 const botaoLimpaFinalizados = document.getElementById('remover-finalizados');
 botaoLimpaFinalizados.addEventListener('click', apagaFinalizados);
+
+function salvarTarefas() {
+  localStorage.setItem('lista', lista.outerHTML);
+}
+
+const botaoSalvaTarefas = document.getElementById('salvar-tarefas');
+botaoSalvaTarefas.addEventListener('click', salvarTarefas);
