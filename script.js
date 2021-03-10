@@ -3,7 +3,7 @@ function limparInput() {
 }
 
 function adicionaTarefa() {
-  let tarefa = document.getElementById('texto-tarefa').value;
+  const tarefa = document.getElementById('texto-tarefa').value;
   if (tarefa !== '') {
     const criarLi = document.createElement('li');
     const lista = document.getElementById('lista-tarefas');
@@ -18,3 +18,15 @@ function adicionaEventoBotao() {
 }
 
 adicionaEventoBotao();
+
+function colocaFundoCinza(event) {
+  const evento = event;
+  const tarefaJaSelecionada = document.querySelector('.selecionado');
+  if (tarefaJaSelecionada !== null) {
+    tarefaJaSelecionada.classList.remove('selecionado');
+  }
+  evento.target.classList.add('selecionado');
+}
+
+const lista = document.getElementById('lista-tarefas');
+lista.addEventListener('click', colocaFundoCinza);
