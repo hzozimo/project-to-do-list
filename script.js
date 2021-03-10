@@ -42,3 +42,13 @@ function colocaTiraRisco(event) {
 }
 
 lista.addEventListener('dblclick', colocaTiraRisco);
+
+function esvaziaLista() {
+  const lista = document.getElementById('lista-tarefas');
+  while (lista.firstChild) { // esvazia a tabela, tirado do link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
+    lista.removeChild(lista.lastChild);
+  }
+}
+
+const botaoLimpa = document.getElementById('apaga-tudo');
+botaoLimpa.addEventListener('click', esvaziaLista);
