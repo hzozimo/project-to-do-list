@@ -33,7 +33,6 @@ lista.addEventListener('click', colocaFundoCinza);
 
 function colocaTiraRisco(event) {
   const evento = event;
-  console.log(evento.target.classList);
   if ((evento.target.classList.value).includes('completed')) {
     evento.target.classList.remove('completed');
   } else {
@@ -52,3 +51,13 @@ function esvaziaLista() {
 
 const botaoLimpa = document.getElementById('apaga-tudo');
 botaoLimpa.addEventListener('click', esvaziaLista);
+
+function apagaFinalizados() {
+  const finalizados = document.getElementsByClassName('completed');
+  while (finalizados[0]) { // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
+    finalizados[0].parentNode.removeChild(finalizados[0]);
+  }
+}
+
+const botaoLimpaFinalizados = document.getElementById('remover-finalizados');
+botaoLimpaFinalizados.addEventListener('click', apagaFinalizados);
