@@ -30,3 +30,15 @@ function colocaFundoCinza(event) {
 
 const lista = document.getElementById('lista-tarefas');
 lista.addEventListener('click', colocaFundoCinza);
+
+function colocaTiraRisco(event) {
+  const evento = event;
+  console.log(evento.target.classList);
+  if ((evento.target.classList.value).includes('completed')) {
+    evento.target.classList.remove('completed');
+  } else {
+    evento.target.classList.add('completed');
+  }
+}
+
+lista.addEventListener('dblclick', colocaTiraRisco);
