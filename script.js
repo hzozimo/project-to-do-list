@@ -1,12 +1,12 @@
 const lista = document.getElementById('lista-tarefas');
 
-// function pegaValoresSalvos() {
-//   if (localStorage.getItem('lista') !== '') {
-//     document.getElementById('container-lista-tarefas').outerHTML = localStorage.getItem('lista');
-//   }
-// }
+function pegaValoresSalvos() {
+  if (localStorage.getItem('lista') !== '') {
+    lista.innerHTML = (localStorage.getItem('lista'));
+  }
+}
 
-// window.onload = pegaValoresSalvos;
+window.onload = pegaValoresSalvos;
 
 function limparInput() {
   document.getElementById('texto-tarefa').value = '';
@@ -70,7 +70,7 @@ const botaoLimpaFinalizados = document.getElementById('remover-finalizados');
 botaoLimpaFinalizados.addEventListener('click', apagaFinalizados);
 
 function salvarTarefas() {
-  localStorage.setItem('lista', lista.outerHTML);
+  localStorage.setItem('lista', lista.innerHTML);
 }
 
 const botaoSalvaTarefas = document.getElementById('salvar-tarefas');
