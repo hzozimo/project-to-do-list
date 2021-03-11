@@ -53,6 +53,7 @@ lista.addEventListener('dblclick', colocaTiraRisco);
 function esvaziaLista() {
   while (lista.firstChild) { // esvazia a tabela, tirado do link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
     lista.removeChild(lista.lastChild);
+    localStorage.clear();
   }
 }
 
@@ -75,3 +76,29 @@ function salvarTarefas() {
 
 const botaoSalvaTarefas = document.getElementById('salvar-tarefas');
 botaoSalvaTarefas.addEventListener('click', salvarTarefas);
+
+function moverParaCima() {
+  const listaArray = document.getElementsByTagName('li');
+  for (let index = 0; index < listaArray.length; index += 1) {
+    if ((index !== 0) && ((listaArray[index].classList.value).includes('selecionado'))) {
+      const temp = listaArray[index].outerHTML;
+      listaArray[index].outerHTML = listaArray[index - 1].outerHTML;
+      listaArray[index - 1].outerHTML = temp;
+    }
+  }
+}
+const moverCima = document.getElementById('mover-cima');
+moverCima.addEventListener('click', moverParaCima);
+
+function moverParaBaixo() {
+  const listaArray = document.getElementsByTagName('li');
+  for (let index = listaArray.length -1; index >= 0; index -= 1) {
+    if ((index !== (listaArray.length - 1)) && ((listaArray[index].classList.value).includes('selecionado'))) {
+      const temp = listaArray[index].outerHTML;
+      listaArray[index].outerHTML = listaArray[index + 1].outerHTML;
+      listaArray[index + 1].outerHTML = temp;
+    }
+  }
+}
+const moverBaixo = document.getElementById('mover-baixo');
+moverBaixo.addEventListener('click', moverParaBaixo);
