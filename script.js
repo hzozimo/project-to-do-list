@@ -92,8 +92,9 @@ moverCima.addEventListener('click', moverParaCima);
 
 function moverParaBaixo() {
   const listaArray = document.getElementsByTagName('li');
-  for (let index = listaArray.length -1; index >= 0; index -= 1) {
-    if ((index !== (listaArray.length - 1)) && ((listaArray[index].classList.value).includes('selecionado'))) {
+  const t = listaArray.length;
+  for (let index = t - 1; index >= 0; index -= 1) {
+    if ((index !== (t - 1)) && ((listaArray[index].classList.value).includes('selecionado'))) {
       const temp = listaArray[index].outerHTML;
       listaArray[index].outerHTML = listaArray[index + 1].outerHTML;
       listaArray[index + 1].outerHTML = temp;
