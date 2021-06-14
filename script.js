@@ -83,8 +83,8 @@ const moverTarefaParaBaixo = () => {
     }
   }
 }
-const moverBaixo = document.getElementById('mover-baixo');
-moverBaixo.addEventListener('click', moverParaBaixo);
+const botaoMoverParaBaixo = document.getElementById('mover-baixo');
+botaoMoverParaBaixo.addEventListener('click', moverTarefaParaBaixo);
 
 function removeSelecionado() {
   const selecionado = document.getElementsByClassName('selecionado');
