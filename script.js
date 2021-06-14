@@ -20,6 +20,8 @@ function adicionaTarefa() {
     limparInput();
   }
 }
+const botaoAdicionarTarefa = document.getElementById('criar-tarefa');
+botaoAdicionarTarefa.addEventListener('click', adicionaTarefa);
 
 function adicionaEventoBotao() {
   const botao = document.getElementById('criar-tarefa');
