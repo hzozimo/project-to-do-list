@@ -5,12 +5,7 @@ const recuperarTarefasNoLocalStorage = () => {
     listaDeTarefas.innerHTML = (localStorage.getItem('lista'));
   }
 }
-
-window.onload = pegaValoresSalvos;
-
-function limparInput() {
-  document.getElementById('texto-tarefa').value = '';
-}
+window.onload = recuperarTarefasNoLocalStorage;
 
 function adicionaTarefa() {
   const tarefa = document.getElementById('texto-tarefa').value;
