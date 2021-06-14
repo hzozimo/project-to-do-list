@@ -41,13 +41,10 @@ const finalizaTarefa = ({ target }) => {
 }
 listaDeTarefas.addEventListener('dblclick', finalizaTarefa);
 
-lista.addEventListener('dblclick', colocaTiraRisco);
-
-function esvaziaLista() {
-  while (lista.firstChild) { // esvazia a tabela, tirado do link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
-    lista.removeChild(lista.lastChild);
-    localStorage.clear();
-  }
+const esvaziaLista = () => {
+  const tarefas = document.querySelectorAll('li');
+  tarefas.forEach((tarefa) => tarefa.remove());
+}
 }
 
 const botaoLimpa = document.getElementById('apaga-tudo');
