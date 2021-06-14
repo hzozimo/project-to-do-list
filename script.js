@@ -1,115 +1,94 @@
-const lista = document.getElementById('lista-tarefas');
+const listaDeTarefas = document.getElementById('lista-tarefas');
 
-function pegaValoresSalvos() {
+const recuperarTarefasNoLocalStorage = () => {
   if (localStorage.getItem('lista') !== '') {
-    lista.innerHTML = (localStorage.getItem('lista'));
+    listaDeTarefas.innerHTML = (localStorage.getItem('lista'));
   }
 }
-
-window.onload = pegaValoresSalvos;
-
-function limparInput() {
-  document.getElementById('texto-tarefa').value = '';
-}
+window.onload = recuperarTarefasNoLocalStorage;
 
 function adicionaTarefa() {
   const tarefa = document.getElementById('texto-tarefa').value;
+  const limparInput = () => document.getElementById('texto-tarefa').value = '';
+  const adicionarLi = (tarefa) => {
+    const li = document.createElement('li');
+    listaDeTarefas.appendChild(li).innerText = tarefa;
+  }
+
   if (tarefa !== '') {
-    const criarLi = document.createElement('li');
-    lista.appendChild(criarLi).innerText = tarefa;
+    adicionarLi(tarefa);
     limparInput();
   }
 }
+const botaoAdicionarTarefa = document.getElementById('criar-tarefa');
+botaoAdicionarTarefa.addEventListener('click', adicionaTarefa);
 
-function adicionaEventoBotao() {
-  const botao = document.getElementById('criar-tarefa');
-  botao.addEventListener('click', adicionaTarefa);
-}
-
-adicionaEventoBotao();
-
-function colocaFundoCinza(event) {
-  const evento = event;
+const selecionaTarefa = ({ target }) => {
   const tarefaJaSelecionada = document.querySelector('.selecionado');
   if (tarefaJaSelecionada !== null) {
     tarefaJaSelecionada.classList.remove('selecionado');
   }
-  evento.target.classList.add('selecionado');
+  target.classList.add('selecionado');
 }
+listaDeTarefas.addEventListener('click', selecionaTarefa);
 
-lista.addEventListener('click', colocaFundoCinza);
-
-function colocaTiraRisco(event) {
-  const evento = event;
-  if ((evento.target.classList.value).includes('completed')) {
-    evento.target.classList.remove('completed');
+const finalizaTarefa = ({ target }) => {
+  if (target.classList.contains('completed')) {
+    target.classList.remove('completed');
   } else {
-    evento.target.classList.add('completed');
+    target.classList.add('completed');
   }
 }
+listaDeTarefas.addEventListener('dblclick', finalizaTarefa);
 
-lista.addEventListener('dblclick', colocaTiraRisco);
-
-function esvaziaLista() {
-  while (lista.firstChild) { // esvazia a tabela, tirado do link https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
-    lista.removeChild(lista.lastChild);
-    localStorage.clear();
-  }
+const esvaziaLista = () => {
+  const tarefas = document.querySelectorAll('li');
+  tarefas.forEach((tarefa) => tarefa.remove());
 }
+const botaoLimpar = document.getElementById('apaga-tudo');
+botaoLimpar.addEventListener('click', esvaziaLista);
 
-const botaoLimpa = document.getElementById('apaga-tudo');
-botaoLimpa.addEventListener('click', esvaziaLista);
-
-function apagaFinalizados() {
-  const finalizados = document.getElementsByClassName('completed');
-  while (finalizados[0]) { // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
-    finalizados[0].parentNode.removeChild(finalizados[0]);
-  }
+const apagaFinalizados = () => {
+  const tarefasFinalizadas = document.querySelectorAll('.completed');
+  tarefasFinalizadas.forEach((tarefa) => tarefa.remove()); // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
 }
+const botaoLimparFinalizados = document.getElementById('remover-finalizados');
+botaoLimparFinalizados.addEventListener('click', apagaFinalizados);
 
-const botaoLimpaFinalizados = document.getElementById('remover-finalizados');
-botaoLimpaFinalizados.addEventListener('click', apagaFinalizados);
+const salvarTarefasNoLocalStorage = () => localStorage.setItem('lista', listaDeTarefas.innerHTML);
+const botaoSalvarTarefas = document.getElementById('salvar-tarefas');
+botaoSalvarTarefas.addEventListener('click', salvarTarefasNoLocalStorage);
 
-function salvarTarefas() {
-  localStorage.setItem('lista', lista.innerHTML);
-}
-
-const botaoSalvaTarefas = document.getElementById('salvar-tarefas');
-botaoSalvaTarefas.addEventListener('click', salvarTarefas);
-
-function moverParaCima() {
-  const listaArray = document.getElementsByTagName('li');
-  for (let index = 0; index < listaArray.length; index += 1) {
-    if ((index !== 0) && ((listaArray[index].classList.value).includes('selecionado'))) {
-      const temp = listaArray[index].outerHTML;
-      listaArray[index].outerHTML = listaArray[index - 1].outerHTML;
-      listaArray[index - 1].outerHTML = temp;
+const moverTarefaParaCima = () => {
+  const tarefas = document.getElementsByTagName('li');
+  for (let index = 0; index < tarefas.length; index += 1) {
+    if ((index !== 0) && (tarefas[index].classList.contains('selecionado'))) {
+      const temp = tarefas[index].outerHTML;
+      tarefas[index].outerHTML = tarefas[index - 1].outerHTML;
+      tarefas[index - 1].outerHTML = temp;
     }
   }
 }
-const moverCima = document.getElementById('mover-cima');
-moverCima.addEventListener('click', moverParaCima);
+const botaoMoverParaCima = document.getElementById('mover-cima');
+botaoMoverParaCima.addEventListener('click', moverTarefaParaCima);
 
-function moverParaBaixo() {
-  const listaArray = document.getElementsByTagName('li');
-  const t = listaArray.length;
-  for (let index = t - 1; index >= 0; index -= 1) {
-    if ((index !== (t - 1)) && ((listaArray[index].classList.value).includes('selecionado'))) {
-      const temp = listaArray[index].outerHTML;
-      listaArray[index].outerHTML = listaArray[index + 1].outerHTML;
-      listaArray[index + 1].outerHTML = temp;
+const moverTarefaParaBaixo = () => {
+  const tarefas = document.getElementsByTagName('li');
+  const quantidadeDeTarefas = tarefas.length - 1;
+  for (let index = quantidadeDeTarefas; index >= 0; index -= 1) {
+    if ((index !== quantidadeDeTarefas) && (tarefas[index].classList.contains('selecionado'))) {
+      const temp = tarefas[index].outerHTML;
+      tarefas[index].outerHTML = tarefas[index + 1].outerHTML;
+      tarefas[index + 1].outerHTML = temp;
     }
   }
 }
-const moverBaixo = document.getElementById('mover-baixo');
-moverBaixo.addEventListener('click', moverParaBaixo);
+const botaoMoverParaBaixo = document.getElementById('mover-baixo');
+botaoMoverParaBaixo.addEventListener('click', moverTarefaParaBaixo);
 
-function removeSelecionado() {
-  const selecionado = document.getElementsByClassName('selecionado');
-  while (selecionado[0]) { // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
-    selecionado[0].parentNode.removeChild(selecionado[0]);
-  }
+const removeSelecionado = () => {
+  const tarefaJaSelecionada = document.querySelector('.selecionado');
+  tarefaJaSelecionada.remove();
 }
-
 const botaoRemoveSelecionado = document.getElementById('remover-selecionado');
 botaoRemoveSelecionado.addEventListener('click', removeSelecionado);
