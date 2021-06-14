@@ -1,8 +1,8 @@
-const lista = document.getElementById('lista-tarefas');
+const listaDeTarefas = document.getElementById('lista-tarefas');
 
-function pegaValoresSalvos() {
+const recuperarTarefasNoLocalStorage = () => {
   if (localStorage.getItem('lista') !== '') {
-    lista.innerHTML = (localStorage.getItem('lista'));
+    listaDeTarefas.innerHTML = (localStorage.getItem('lista'));
   }
 }
 
@@ -36,6 +36,7 @@ function colocaFundoCinza(event) {
   }
   evento.target.classList.add('selecionado');
 }
+listaDeTarefas.addEventListener('click', selecionaTarefa);
 
 lista.addEventListener('click', colocaFundoCinza);
 
@@ -47,6 +48,7 @@ function colocaTiraRisco(event) {
     evento.target.classList.add('completed');
   }
 }
+listaDeTarefas.addEventListener('dblclick', finalizaTarefa);
 
 lista.addEventListener('dblclick', colocaTiraRisco);
 
