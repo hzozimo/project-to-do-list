@@ -45,7 +45,8 @@ const esvaziaLista = () => {
   const tarefas = document.querySelectorAll('li');
   tarefas.forEach((tarefa) => tarefa.remove());
 }
-}
+const botaoLimpar = document.getElementById('apaga-tudo');
+botaoLimpar.addEventListener('click', esvaziaLista);
 
 const botaoLimpa = document.getElementById('apaga-tudo');
 botaoLimpa.addEventListener('click', esvaziaLista);
