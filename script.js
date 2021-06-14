@@ -59,22 +59,16 @@ const salvarTarefasNoLocalStorage = () => localStorage.setItem('lista', listaDeT
 const botaoSalvarTarefas = document.getElementById('salvar-tarefas');
 botaoSalvarTarefas.addEventListener('click', salvarTarefasNoLocalStorage);
 
-function salvarTarefas() {
-  localStorage.setItem('lista', lista.innerHTML);
-}
-
-const botaoSalvaTarefas = document.getElementById('salvar-tarefas');
-botaoSalvaTarefas.addEventListener('click', salvarTarefas);
-
-function moverParaCima() {
-  const listaArray = document.getElementsByTagName('li');
-  for (let index = 0; index < listaArray.length; index += 1) {
-    if ((index !== 0) && ((listaArray[index].classList.value).includes('selecionado'))) {
-      const temp = listaArray[index].outerHTML;
-      listaArray[index].outerHTML = listaArray[index - 1].outerHTML;
-      listaArray[index - 1].outerHTML = temp;
+const moverTarefaParaCima = () => {
+  const tarefas = document.getElementsByTagName('li');
+  for (let index = 0; index < tarefas.length; index += 1) {
+    if ((index !== 0) && (tarefas[index].classList.contains('selecionado'))) {
+      const temp = tarefas[index].outerHTML;
+      tarefas[index].outerHTML = tarefas[index - 1].outerHTML;
+      tarefas[index - 1].outerHTML = temp;
     }
   }
+}
 }
 const moverCima = document.getElementById('mover-cima');
 moverCima.addEventListener('click', moverParaCima);
