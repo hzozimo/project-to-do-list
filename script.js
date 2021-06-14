@@ -55,8 +55,9 @@ const apagaFinalizados = () => {
 const botaoLimparFinalizados = document.getElementById('remover-finalizados');
 botaoLimparFinalizados.addEventListener('click', apagaFinalizados);
 
-const botaoLimpaFinalizados = document.getElementById('remover-finalizados');
-botaoLimpaFinalizados.addEventListener('click', apagaFinalizados);
+const salvarTarefasNoLocalStorage = () => localStorage.setItem('lista', listaDeTarefas.innerHTML);
+const botaoSalvarTarefas = document.getElementById('salvar-tarefas');
+botaoSalvarTarefas.addEventListener('click', salvarTarefasNoLocalStorage);
 
 function salvarTarefas() {
   localStorage.setItem('lista', lista.innerHTML);
