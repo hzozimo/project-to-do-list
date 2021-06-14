@@ -52,7 +52,8 @@ const apagaFinalizados = () => {
   const tarefasFinalizadas = document.querySelectorAll('.completed');
   tarefasFinalizadas.forEach((tarefa) => tarefa.remove()); // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
 }
-}
+const botaoLimparFinalizados = document.getElementById('remover-finalizados');
+botaoLimparFinalizados.addEventListener('click', apagaFinalizados);
 
 const botaoLimpaFinalizados = document.getElementById('remover-finalizados');
 botaoLimpaFinalizados.addEventListener('click', apagaFinalizados);
