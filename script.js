@@ -28,7 +28,7 @@ const selecionaTarefa = ({ target }) => {
   if (tarefaJaSelecionada !== null) {
     tarefaJaSelecionada.classList.remove('selecionado');
   }
-  evento.target.classList.add('selecionado');
+  target.classList.add('selecionado');
 }
 listaDeTarefas.addEventListener('click', selecionaTarefa);
 
