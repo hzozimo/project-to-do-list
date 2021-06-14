@@ -48,14 +48,10 @@ const esvaziaLista = () => {
 const botaoLimpar = document.getElementById('apaga-tudo');
 botaoLimpar.addEventListener('click', esvaziaLista);
 
-const botaoLimpa = document.getElementById('apaga-tudo');
-botaoLimpa.addEventListener('click', esvaziaLista);
-
-function apagaFinalizados() {
-  const finalizados = document.getElementsByClassName('completed');
-  while (finalizados[0]) { // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
-    finalizados[0].parentNode.removeChild(finalizados[0]);
-  }
+const apagaFinalizados = () => {
+  const tarefasFinalizadas = document.querySelectorAll('.completed');
+  tarefasFinalizadas.forEach((tarefa) => tarefa.remove()); // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
+}
 }
 
 const botaoLimpaFinalizados = document.getElementById('remover-finalizados');
