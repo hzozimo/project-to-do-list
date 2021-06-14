@@ -9,9 +9,14 @@ window.onload = recuperarTarefasNoLocalStorage;
 
 function adicionaTarefa() {
   const tarefa = document.getElementById('texto-tarefa').value;
+  const limparInput = () => document.getElementById('texto-tarefa').value = '';
+  const adicionarLi = (tarefa) => {
+    const li = document.createElement('li');
+    listaDeTarefas.appendChild(li).innerText = tarefa;
+  }
+
   if (tarefa !== '') {
-    const criarLi = document.createElement('li');
-    lista.appendChild(criarLi).innerText = tarefa;
+    adicionarLi(tarefa);
     limparInput();
   }
 }
