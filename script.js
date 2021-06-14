@@ -86,12 +86,9 @@ const moverTarefaParaBaixo = () => {
 const botaoMoverParaBaixo = document.getElementById('mover-baixo');
 botaoMoverParaBaixo.addEventListener('click', moverTarefaParaBaixo);
 
-function removeSelecionado() {
-  const selecionado = document.getElementsByClassName('selecionado');
-  while (selecionado[0]) { // https://stackoverflow.com/questions/10842471/how-to-remove-all-elements-of-a-certain-class-from-the-dom
-    selecionado[0].parentNode.removeChild(selecionado[0]);
-  }
+const removeSelecionado = () => {
+  const tarefaJaSelecionada = document.querySelector('.selecionado');
+  tarefaJaSelecionada.remove();
 }
-
 const botaoRemoveSelecionado = document.getElementById('remover-selecionado');
 botaoRemoveSelecionado.addEventListener('click', removeSelecionado);
