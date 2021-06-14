@@ -72,14 +72,14 @@ const moverTarefaParaCima = () => {
 const botaoMoverParaCima = document.getElementById('mover-cima');
 botaoMoverParaCima.addEventListener('click', moverTarefaParaCima);
 
-function moverParaBaixo() {
-  const listaArray = document.getElementsByTagName('li');
-  const t = listaArray.length;
-  for (let index = t - 1; index >= 0; index -= 1) {
-    if ((index !== (t - 1)) && ((listaArray[index].classList.value).includes('selecionado'))) {
-      const temp = listaArray[index].outerHTML;
-      listaArray[index].outerHTML = listaArray[index + 1].outerHTML;
-      listaArray[index + 1].outerHTML = temp;
+const moverTarefaParaBaixo = () => {
+  const tarefas = document.getElementsByTagName('li');
+  const quantidadeDeTarefas = tarefas.length - 1;
+  for (let index = quantidadeDeTarefas; index >= 0; index -= 1) {
+    if ((index !== quantidadeDeTarefas) && (tarefas[index].classList.contains('selecionado'))) {
+      const temp = tarefas[index].outerHTML;
+      tarefas[index].outerHTML = tarefas[index + 1].outerHTML;
+      tarefas[index + 1].outerHTML = temp;
     }
   }
 }
