@@ -23,15 +23,7 @@ function adicionaTarefa() {
 const botaoAdicionarTarefa = document.getElementById('criar-tarefa');
 botaoAdicionarTarefa.addEventListener('click', adicionaTarefa);
 
-function adicionaEventoBotao() {
-  const botao = document.getElementById('criar-tarefa');
-  botao.addEventListener('click', adicionaTarefa);
-}
-
-adicionaEventoBotao();
-
-function colocaFundoCinza(event) {
-  const evento = event;
+const selecionaTarefa = ({ target }) => {
   const tarefaJaSelecionada = document.querySelector('.selecionado');
   if (tarefaJaSelecionada !== null) {
     tarefaJaSelecionada.classList.remove('selecionado');
