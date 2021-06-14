@@ -69,9 +69,8 @@ const moverTarefaParaCima = () => {
     }
   }
 }
-}
-const moverCima = document.getElementById('mover-cima');
-moverCima.addEventListener('click', moverParaCima);
+const botaoMoverParaCima = document.getElementById('mover-cima');
+botaoMoverParaCima.addEventListener('click', moverTarefaParaCima);
 
 function moverParaBaixo() {
   const listaArray = document.getElementsByTagName('li');
