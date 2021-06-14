@@ -32,14 +32,11 @@ const selecionaTarefa = ({ target }) => {
 }
 listaDeTarefas.addEventListener('click', selecionaTarefa);
 
-lista.addEventListener('click', colocaFundoCinza);
-
-function colocaTiraRisco(event) {
-  const evento = event;
-  if ((evento.target.classList.value).includes('completed')) {
-    evento.target.classList.remove('completed');
+const finalizaTarefa = ({ target }) => {
+  if (target.classList.contains('completed')) {
+    target.classList.remove('completed');
   } else {
-    evento.target.classList.add('completed');
+    target.classList.add('completed');
   }
 }
 listaDeTarefas.addEventListener('dblclick', finalizaTarefa);
